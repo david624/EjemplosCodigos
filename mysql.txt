@@ -1,0 +1,90 @@
+ Codigos de mysql
+ //-------------------------------------------------------------
+ Mostrar bases de datos existentes
+ 
+ SHOW DATABASES;
+ 
+  //-------------------------------------------------------------
+ Crear una base de datos
+ 
+ CREATE DATABASE Prueba1
+ 
+ Donde Prueba1 es el nombre de la base de datos, estos nombres solo aceptan minusculas por lo que la base de datos se crea 
+ como prueba1
+ //-------------------------------------------------------------
+ Seleccionar una base de datos para realizar modificaciones o consultas
+ USE prueba1
+ 
+ 
+ //-------------------------------------------------------------
+ Crear una tabla en la base de datos exitente
+ 
+ CREATE TABLE datos(id int(11) NOT NULL COMMENT 'Identificador',nombre varchar(50) NOT NULL COMMENT 'Nombre Persona', 
+ apellidos varchar(50) NOT NULL COMMENT 'Apellidos',telefono int(9) NOT NULL COMMENT 'Celular',cp int(5) DEFAULT NULL,
+ edad int(3) DEFAULT NULL, profesion text NOT NULL, PRIMARY KEY (id),UNIQUE KEY(telefono));
+ 
+
+  //-------------------------------------------------------------
+  Utilizando la instruccion 
+  
+  DESCRIBE tables
+  
+  +-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| id        | int(11)     | NO   | PRI | NULL    |       |
+| nombre    | varchar(50) | NO   |     | NULL    |       |
+| apellidos | varchar(50) | NO   |     | NULL    |       |
+| telefono  | int(9)      | NO   | UNI | NULL    |       |
+| cp        | int(5)      | YES  |     | NULL    |       |
+| edad      | int(3)      | YES  |     | NULL    |       |
+| profesion | text        | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+ Se muestra la tabla, el nombre de las columnas y el tipo de datos
+ //--------------------------------------------------------------------
+ AGREGANDO REGISTROS A LA TABLA
+ 
+  INSERT INTO datos VALUES('1','David','Castro Gonzalez','5560903571','50637','24','dep..');
+//------------------------------------------------------------------------------
+  Ver todos los registros en la tabla 
+  
+  SELECT * FROM datos
+
+  +----+--------+-----------------+-----------+-------+------+-----------+
+| id | nombre | apellidos       | telefono  | cp    | edad | profesion |
++----+--------+-----------------+-----------+-------+------+-----------+
+|  1 | David  | Castro Gonzalez | 560903571 | 50637 |   24 | dep..     |
+|  2 | Juan   | Perez Gonzalez  |   5608952 |  5030 |   26 | detodo..  |
++----+--------+-----------------+-----------+-------+------+-----------+
+   
+  
+//----------------------------------------------------------------------------------------
+  Si se desea seleccionar los datos que cumplen con una condicion en especifico se utiliza WHERE 
+SELECT * FROM datos WHERE nombre = 'David';
+
+//---------------------------------------------------------------------------------------- 
+ Si se desea ver datos especificos con alguna condicion en especifico 
+ SELECT apellidos FROM datos WHERE nombre = 'David';
+ 
+ //---------------------------------------------------------------------------------------- 
+ También se pueden aplicar operadores logicos en las consultas como OR 
+ 
+ SELECT apellidos FROM datos WHERE nombre = 'David' OR edad = '26' ;
+ 
+ 
+  //---------------------------------------------------------------------------------------- 
+  Si los datos consultados necesitan estar en orden se utiliza
+  
+   SELECT apellidos,profesion FROM datos WHERE nombre = 'David' OR edad <= '26' ORDER BY edad
+  //---------------------------------------------------------------------------------------- 
+  para modificar datos en alguna columna se requiere identificar en que fila esta y el dato a modificar 
+  
+   UPDATE datos SET nombre = 'Ramon' WHERE id = '2';
+  //---------------------------------------------------------------------------------------- 
+  Eliminar una fila completa, identificar cual y eliminar
+   DELETE FROM datos WHERE id = '4';
+  //---------------------------------------------------------------------------------------- 
+  
+  
+  
+  
